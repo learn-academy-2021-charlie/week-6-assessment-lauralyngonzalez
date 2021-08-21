@@ -27,7 +27,7 @@ var people = [
 
 describe("People function", () => {
   it("Takes in an array of objects and returns an array with a sentence about each person with their names capitalized", () => {
-    let output = ["Ford Prefect is a hitchhiker.",
+    const output = ["Ford Prefect is a hitchhiker.",
       "Zaphod Beeblebrox is a president of the galaxy.",
       "Arthur Dent is a radio employee."]
 
@@ -87,10 +87,11 @@ var hodgepodge2 = [5, "Hola", 43, -34, "greetings", true]
 
 describe("Remainders of Nums Divided by 3", () => {
   it("Takes in a mixed data array and returns an array of only the REMAINDERS of the numbers when divided by 3", () => {
-    let output1 = [ 2, 0, -1, 0 ]
-    let output2 = [ 2, 1, -1 ]
+    const output1 = [ 2, 0, -1, 0 ]
+    const output2 = [ 2, 1, -1 ]
 
-    // expect(mod3)
+    expect(mod3(hodgepodge1)).toEqual(output1)
+    expect(mod3(hodgepodge2)).toEqual(output2)
   })
 })
 
@@ -104,7 +105,10 @@ describe("Remainders of Nums Divided by 3", () => {
   then map, return the val % 3
   return the result
 */
-
+const mod3 = (arr) => {
+  return arr.filter(val => typeof(val) === "number")
+            .map(num => num % 3)
+}
 
 
 // --------------------3) Create a function that takes in an array of numbers and returns the sum of all the numbers cubed.
@@ -116,13 +120,35 @@ var cubeAndSum1 = [2, 3, 4]
 var cubeAndSum2 = [0, 5, 10]
 // Expected output: 1125
 
-// describe("", () => {
-//   it("", () => {
+describe("Sum of numbers cubed", () => {
+  it("Takes in an array of numbers and returns the sum of all the numbers cubed", () => {
+    const output1 = 99
+    const output2 = 1125
 
-
-
-//   })
-// })
+    expect(sumAndCubed(cubeAndSum1)).toEqual(output1)
+    expect(sumAndCubed(cubeAndSum2)).toEqual(output2)
+  })
+})
 
 
 // b) Create the function that makes the test pass.
+
+/*
+sumAndCubed
+param: array of nums
+Need to cube each number and sum them all together
+Going to try out reduce((prevVal, currVal)) => returns new prevVal, initialVal)
+initialVal is optional
+If no initialVal specified, then prevVal is the first element, currVal is second element.
+If initialVal is specified, then prevVal = initialVal and currVal is the first element
+ex 1:
+prevVal   currVal     new prevVal
+0   +   2^3   =       8
+8   +   3^3   =       35
+35    +   4^3 = 35 + 64 =   99
+Looks like this checks out.. so use (prevVal + currVal ** 3), and make initialVal be 0
+*/
+
+const sumAndCubed = (arr) => {
+  return arr.reduce((prev, curr) => prev + curr ** 3, 0)
+}
