@@ -33,7 +33,7 @@ class BlogPostsController < ApplicationController
     end
   end
 
-  # ---6) Returns the blog post with the matching primary key
+  # ---6) Returns the blog post with the matching primary key for editing
   def edit
     @post = BlogPost.find(params[:id])
   end
